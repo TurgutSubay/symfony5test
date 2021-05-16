@@ -1,0 +1,21 @@
+{% extends './layouts/base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="css/js-year-calendar.min.css" rel="stylesheet" >
+    <style>
+        .year-neighbor {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="js/js-year-calendar.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="calendar"></div>
+<script>
+    new Calendar('#calendar')
+</script>
+{% endblock %}
