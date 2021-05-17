@@ -76,10 +76,30 @@
     }
 </style>
 {% endblock %}
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        let aPath =location.pathname.split("/");
+        let clickedTag = location.pathname.split("/")[aPath.length-1];
+        let topNav = $(".topnav").find("a");
+        let foundClass= false;
+        $("a").removeClass("active");
+        for (let i = 0; i < topNav.length; i++) {
+            if($(topNav[i]).attr("class") == clickedTag){
+                $('a.' + clickedTag).addClass('active');
+                foundClass= true;
+            }
+        }
+        if (!foundClass){
+            $('a.home').addClass('active');
+        }
+    });
+</script>
+{% endblock %}
 <div class="topnav">
-    <a class="active" href="{{ path('main') }}">Home</a>
-    <a href="about">About</a>
-    <a href="calendar">Calendar</a>
+    <a href="{{ path('main') }}" class="home">Home</a>
+    <a href="about?aa=1" class="about">About</a>
+    <a href="calendar" class="calendar">Calendar</a>
     <div class="search-container">
         <form action="/action_page.php">
             <input type="text" placeholder="Search.." name="search">
