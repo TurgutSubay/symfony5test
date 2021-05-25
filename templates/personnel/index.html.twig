@@ -1,0 +1,30 @@
+{% extends './layouts/base.html.twig' %}
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <button id="modalButton" class="btn">Open Modal</button>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script src="./js/datatable.js"></script>
+{% endblock %}
