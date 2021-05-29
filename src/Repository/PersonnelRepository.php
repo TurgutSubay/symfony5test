@@ -20,13 +20,29 @@ class PersonnelRepository extends ServiceEntityRepository
         parent::__construct($registry, Personnel::class);
     }
 
-    public function JoinOffice($id = 1)
+    public function JoinOfficeDQL($id = 1)
     {
        $entityManager = $this->getEntityManager();
        $query = $entityManager->createQuery('SELECT p,o.name AS officeName FROM App\Entity\Personnel p JOIN p.office o WHERE p.id=1');
-        return $query->getResult();
+       return $query->getResult();
     }
 
+
+    public function JoinOfficeQueryBuilder($id = 1)
+    {
+        $entityManager = $this->getEntityManager();
+        $qb = $entityManager->createQueryBuilder();
+        $qb->select('p,o.name AS officeName')
+            ->from('App\Entity\Personnel', 'p')
+            ->join('p.office','o',null,null)
+            ->where('p.id > :id')
+            ->orderBy('p.name', 'ASC')
+            ->setParameter('id', 0);
+
+        return $qb->getQuery()->getResult();
+    }
+//// Example - $qb->join('u.Group', 'g', 'WITH', 'u.status = ?1')
+//   public function join($join, $alias, $conditionType = null, $condition = null, $indexBy = null);
     // /**
     //  * @return Personnel[] Returns an array of Personnel objects
     //  */
