@@ -34,7 +34,7 @@ class PersonnelController extends AbstractController
          * and gives personnel data.
          */
 
-        $personnel = $personnelRepository->JoinOfficeQueryBuilder();
+        $personnel = $personnelRepository->JoinOfficeQueryBuilder(1);
 
         foreach ($personnel as $item) {
             $data[] = [
