@@ -29,7 +29,9 @@ class PersonnelController extends AbstractController
     {
         $result = true;
         $recordsTotal = 0;
-        $personnel = $personnelRepository->JoinOffice();
+        //$personnel = $personnelRepository->JoinOfficeDQL();
+        $personnel = $personnelRepository->JoinOfficeQueryBuilder();
+        //dd($personnel);
         foreach ($personnel as $item) {
             $data[] = [
                 'id' => $item[0]->getId(),
