@@ -4,8 +4,13 @@ namespace App\Entity;
 
 use App\Repository\PersonnelRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Offices;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
+ * @ORM\Entity
+ * @ORM\Table(name="personnel")
  * @ORM\Entity(repositoryClass=PersonnelRepository::class)
  */
 class Personnel
@@ -33,7 +38,8 @@ class Personnel
     private $position;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Offices", inversedBy="personnel")
+     * @JoinColumn(name="office_id", referencedColumnName="id")
      */
     private $office;
 

@@ -6,6 +6,7 @@ use App\Entity\Personnel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Personnel|null find($id, $lockMode = null, $lockVersion = null)
  * @method Personnel|null findOneBy(array $criteria, array $orderBy = null)
@@ -17,6 +18,13 @@ class PersonnelRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Personnel::class);
+    }
+
+    public function JoinOffice($id = 1)
+    {
+       $entityManager = $this->getEntityManager();
+       $query = $entityManager->createQuery('SELECT p,o.name AS officeName FROM App\Entity\Personnel p JOIN p.office o WHERE p.id=1');
+        return $query->getResult();
     }
 
     // /**
