@@ -51,7 +51,7 @@ class PersonnelRepository extends ServiceEntityRepository
 
     /**
      * @return Personnel[] Returns an array of Personnel objects
-     * Auto produced method
+     * Auto produced method.
      */
 
     public function findByExampleField($value)

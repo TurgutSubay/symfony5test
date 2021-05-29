@@ -31,7 +31,7 @@ class PersonnelController extends AbstractController
         $recordsTotal = 0;
         /*
          * JoinOfficeQueryBuilder method join two tables
-         * and gives personnel data
+         * and gives personnel data.
          */
 
         $personnel = $personnelRepository->JoinOfficeQueryBuilder();
