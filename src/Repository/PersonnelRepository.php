@@ -19,7 +19,7 @@ class PersonnelRepository extends ServiceEntityRepository
         parent::__construct($registry, Personnel::class);
     }
 
-     /**
+    /**
      * JoinOfficeQueryBuilder method joins
      * personnel and offices tables
      * and gives personal data  who works at the given office
@@ -28,19 +28,27 @@ class PersonnelRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $qb = $entityManager->createQueryBuilder();
-        $qb->select('p,o.name AS officeName')
-            ->from('App\Entity\Personnel', 'p')
-            ->join('p.office', 'o', null, null)
-            ->where('o.id = :id')
-            ->orderBy('p.name', 'ASC')
-            ->setParameter('id', $id);
+        if ($id == 'allPersonnel') {
+            $qb->select('p,o.name AS officeName')
+                ->from('App\Entity\Personnel', 'p')
+                ->join('p.office', 'o', null, null)
+                ->where('o.id > 0')
+                ->orderBy('p.name', 'ASC');
+        }else{
+            $qb->select('p,o.name AS officeName')
+                ->from('App\Entity\Personnel', 'p')
+                ->join('p.office', 'o', null, null)
+                ->where('o.id = :id')
+                ->orderBy('p.name', 'ASC')
+                ->setParameter('id', $id);
+        }
 
         return $qb->getQuery()->getResult();
     }
 
     /**
-      * This is test to develop
-      */
+     * This is test to develop
+     */
     public function JoinOfficeDQL($id = 1)
     {
         $entityManager = $this->getEntityManager();

@@ -29,13 +29,25 @@ class PersonnelController extends AbstractController
     {
         $result = true;
         $recordsTotal = 0;
-        /*
+        $draw = $request->get('draw');
+        $formFilter = $request->get('formFilter');
+
+        if (!isset($formFilter)) {
+            return $this->json([
+                'draw' => 1,
+                'result' => $result,
+                "recordsTotal" => $recordsTotal,
+                "recordsFiltered" => $recordsTotal,
+                'data' => [],
+            ]);
+        }
+
+        /**
          * JoinOfficeQueryBuilder method join two tables
          * and gives personnel data.
          */
 
-        $personnel = $personnelRepository->JoinOfficeQueryBuilder(1);
-
+        $personnel = $personnelRepository->JoinOfficeQueryBuilder($formFilter);
         foreach ($personnel as $item) {
             $data[] = [
                 'id' => $item[0]->getId(),
@@ -51,7 +63,6 @@ class PersonnelController extends AbstractController
             $recordsTotal = count($data);
         }
 
-        $draw = $request->get('draw');
         return $this->json([
             'draw' => $draw,
             'result' => $result,
