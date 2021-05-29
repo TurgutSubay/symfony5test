@@ -1,30 +1,55 @@
 {% extends './layouts/base.html.twig' %}
 {% block body %}
     <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-    <div class="example-wrapper">
-        <button id="modalButton" class="btn">Open Modal</button>
-        <table id="example" class="display" style="width:100%">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-            </tr>
-            </tfoot>
-        </table>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-6">
+                    <select class="form-select officeSelect" aria-label="Office select">
+                        <option value="allPersonnel" selected>All Offices</option>
+                        <option value="1">Head Office</option>
+                        <option value="2">İstanbul Office</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <button id="modalButton" class="btn">Open Modal</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="example-wrapper">
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block javascripts %}
-<script src="./js/datatable.js"></script>
+    <script src="./js/datatable.js"></script>
 {% endblock %}

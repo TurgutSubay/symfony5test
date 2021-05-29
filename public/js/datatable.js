@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $('#example').DataTable({
+
+    const personnelTable =  $('#example').DataTable({
         processing: true,
         serverSide: true,
         pageLength: 10,
@@ -12,7 +13,7 @@ $(document).ready(function () {
         order: [[1, "desc"]],
         data: [],
         ajax: {
-            url: "http://localhost/symfony/symfony5test/public/personnelData",
+            url: location.origin + "/symfony/symfony5test/public/personnelData",
             type: "GET",
             datatype: "json",
             dataSrc: function (result) {
@@ -22,7 +23,7 @@ $(document).ready(function () {
             data: function (postData) {
                 console.log("data", postData);
                 return {
-                    formFilter: 'allPersonel',
+                    formFilter: $(".officeSelect").val(),
                     draw: postData.draw,
                     start: postData.start,
                     length: postData.length,
@@ -37,5 +38,21 @@ $(document).ready(function () {
             {"data": "position"},
             {"data": "office"},
         ],
-});
+    });
+
+    $(".officeSelect").change(function () {
+        $.ajax({
+            url: location.origin + '/symfony/symfony5test/public/personnelData',
+            type: "get",
+            data: {formFilter:  $(".officeSelect").val()}
+        })
+            .done(function (response) {
+                console.log('Ajax',response.data);
+                personnelTable.clear();
+                personnelTable.rows.add(response.data).draw();
+            })
+            .fail(function (e) {
+                alert("error"+ e);
+            });
+    });
 });
