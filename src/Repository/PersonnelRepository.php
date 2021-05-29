@@ -6,7 +6,6 @@ use App\Entity\Personnel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-
 /**
  * @method Personnel|null find($id, $lockMode = null, $lockVersion = null)
  * @method Personnel|null findOneBy(array $criteria, array $orderBy = null)
@@ -20,33 +19,41 @@ class PersonnelRepository extends ServiceEntityRepository
         parent::__construct($registry, Personnel::class);
     }
 
+    /*
+     * JoinOfficeDQL same with JoinOfficeQueryBuilder method
+     * this is test to develop
+     */
     public function JoinOfficeDQL($id = 1)
     {
-       $entityManager = $this->getEntityManager();
-       $query = $entityManager->createQuery('SELECT p,o.name AS officeName FROM App\Entity\Personnel p JOIN p.office o WHERE p.id=1');
-       return $query->getResult();
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery('SELECT p,o.name AS officeName FROM App\Entity\Personnel p JOIN p.office o WHERE p.id=1');
+        return $query->getResult();
     }
 
-
+    /*
+     * JoinOfficeQueryBuilder method joins
+     * personnel and offices tables
+     * and gives personnel data
+     */
     public function JoinOfficeQueryBuilder($id = 1)
     {
         $entityManager = $this->getEntityManager();
         $qb = $entityManager->createQueryBuilder();
         $qb->select('p,o.name AS officeName')
             ->from('App\Entity\Personnel', 'p')
-            ->join('p.office','o',null,null)
+            ->join('p.office', 'o', null, null)
             ->where('p.id > :id')
             ->orderBy('p.name', 'ASC')
             ->setParameter('id', 0);
 
         return $qb->getQuery()->getResult();
     }
-//// Example - $qb->join('u.Group', 'g', 'WITH', 'u.status = ?1')
-//   public function join($join, $alias, $conditionType = null, $condition = null, $indexBy = null);
-    // /**
-    //  * @return Personnel[] Returns an array of Personnel objects
-    //  */
-    /*
+
+    /**
+     * @return Personnel[] Returns an array of Personnel objects
+     * Auto produced method.
+     */
+
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('p')
@@ -55,20 +62,20 @@ class PersonnelRepository extends ServiceEntityRepository
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
+    /**
+     * Auto produced method
+     */
+
     public function findOneBySomeField($value): ?Personnel
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
+
 }
