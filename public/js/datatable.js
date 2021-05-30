@@ -17,7 +17,7 @@ $(document).ready(function () {
             type: "GET",
             datatype: "json",
             dataSrc: function (result) {
-                console.log("dataSrc:", result)
+                console.log("dataSrc", result)
                 if (result.data !==null){
                     return result.data;
                 }
@@ -50,7 +50,7 @@ $(document).ready(function () {
             data: {formFilter:  $(".officeSelect").val()}
         })
             .done(function (response) {
-                console.log('Ajax:',response.data);
+                console.log('Ajax',response.data);
                 personnelTable.clear().draw();
                 if (response.data !==null){
                     personnelTable.rows.add(response.data).draw();
