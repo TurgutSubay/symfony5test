@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    const personnelTable =  $('#example').DataTable({
+    const personnelTable = $('#example').DataTable({
         processing: true,
         serverSide: true,
         pageLength: 10,
@@ -18,10 +18,10 @@ $(document).ready(function () {
             datatype: "json",
             dataSrc: function (result) {
                 console.log("dataSrc", result)
-                if (result.data !==null){
+                if (result.data !== null) {
                     return result.data;
                 }
-                return  [];
+                return [];
             },
             data: function (postData) {
                 console.log("data", postData);
@@ -40,6 +40,24 @@ $(document).ready(function () {
             {"data": "name"},
             {"data": "position"},
             {"data": "office"},
+            {
+                name: 'Actions',
+                title: 'Actions',
+                sortable: false,
+                overflow: 'visible',
+                className: 'dt-body-center',
+                width: 30,
+                data: function (row) {
+                    let link = "";
+                    link += `<a href="#" class="btn btn-sm mr-1"> 
+                               <i class="fas fa-edit" style="font-size:14px;color:#5cb85c"></i>
+                             </a>`;
+                    link += `<a href="#" class="btn btn-sm mr-1">
+                               <i class="fas fa-trash-restore" style="font-size:14px;color:red"></i>
+                             </a>`;
+                    return link;
+                }
+            },
         ],
     });
     $(".officeSelect").change(function () {
