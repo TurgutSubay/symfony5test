@@ -20,13 +20,13 @@ class PersonnelController extends AbstractController
      */
     public function index(OfficesRepository $officeRepository): Response
     {
-        $offices =  $officeRepository->findAll();
-        $office=null;
+        $offices = $officeRepository->findAll();
+        $office = null;
         foreach ($offices as $item) {
-            $office[] = ['id'=>$item->getId(),'name'=> $item->getName()];
+            $office[] = ['id' => $item->getId(), 'name' => $item->getName()];
         }
 
-        return $this->render('personnel/index.html.twig', ['office'=>$office]);
+        return $this->render('personnel/index.html.twig', ['office' => $office]);
     }
 
     /**
