@@ -19,8 +19,9 @@
                 <div class="col-6">
                     <select class="form-select officeSelect" aria-label="Office select">
                         <option value="allPersonnel" selected>All Offices</option>
-                        <option value="1">Head Office</option>
-                        <option value="2">İstanbul Office</option>
+                        {% for item in office %}
+                            <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-6">

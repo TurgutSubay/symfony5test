@@ -55,4 +55,19 @@ $(document).ready(function () {
                 alert("error"+ e);
             });
     });
+
+    $.ajax({
+        url: location.origin + '/symfony/symfony5test/public/officeData',
+        type: "get",
+        data: {}
+    })
+        .done(function (response) {
+            console.log('Ajax',response.data);
+            personnelTable.clear();
+            personnelTable.rows.add(response.data).draw();
+        })
+        .fail(function (e) {
+            alert("error"+ e);
+        });
+
 });

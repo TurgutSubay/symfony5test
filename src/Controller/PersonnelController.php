@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Offices;
 use App\Entity\Personnel;
+use App\Repository\OfficesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +14,19 @@ use App\Repository\PersonnelRepository;
 
 class PersonnelController extends AbstractController
 {
+
     /**
      * @Route("/personnel", name="personnel", methods={"GET"})
      */
-    public function index(): Response
+    public function index(OfficesRepository $officeRepository): Response
     {
-        return $this->render('personnel/index.html.twig', []);
+        $offices =  $officeRepository->findAll();
+        $office=null;
+        foreach ($offices as $item) {
+            $office[] = ['id'=>$item->getId(),'name'=> $item->getName()];
+        }
+
+        return $this->render('personnel/index.html.twig', ['office'=>$office]);
     }
 
     /**
@@ -71,4 +79,5 @@ class PersonnelController extends AbstractController
             'data' => $data,
         ]);
     }
+
 }
