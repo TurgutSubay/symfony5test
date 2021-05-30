@@ -18,7 +18,10 @@ $(document).ready(function () {
             datatype: "json",
             dataSrc: function (result) {
                 console.log("dataSrc", result)
-                return result.data;
+                if (result.data !==null){
+                    return result.data;
+                }
+                return  [];
             },
             data: function (postData) {
                 console.log("data", postData);
@@ -48,26 +51,13 @@ $(document).ready(function () {
         })
             .done(function (response) {
                 console.log('Ajax',response.data);
-                personnelTable.clear();
-                personnelTable.rows.add(response.data).draw();
+                personnelTable.clear().draw();
+                if (response.data !==null){
+                    personnelTable.rows.add(response.data).draw();
+                }
             })
             .fail(function (e) {
                 alert("error"+ e);
             });
     });
-
-    $.ajax({
-        url: location.origin + '/symfony/symfony5test/public/officeData',
-        type: "get",
-        data: {}
-    })
-        .done(function (response) {
-            console.log('Ajax',response.data);
-            personnelTable.clear();
-            personnelTable.rows.add(response.data).draw();
-        })
-        .fail(function (e) {
-            alert("error"+ e);
-        });
-
 });
