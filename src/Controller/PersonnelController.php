@@ -39,7 +39,6 @@ class PersonnelController extends AbstractController
         $recordsTotal = 0;
         $draw = $request->get('draw');
         $formFilter = $request->get('formFilter');
-
         if (!isset($formFilter)) {
             return $this->json([
                 'draw' => 1,
